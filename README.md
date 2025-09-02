@@ -15,7 +15,7 @@ This project follows a **three-layer MVVM architecture** to clearly separate con
 2. **Domain Layer:** Contains business logic and use cases for fetching/updating items.
 3. **Presentation Layer:** Manages UI logic with ViewModel, Adapter, and user interactions (RecyclerView, SwipeRefresh).
 
-### Description
-
+### Demo
+[Watch Demo Video]((https://youtube.com/shorts/6qoIbO5hrBI?si=JOEz_YC3WYbwsFs2))
 ## Notes
 - Filtering and search were not implemented due to time constraints.
