@@ -1,4 +1,4 @@
-package com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture
+package com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.presentation
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -7,30 +7,23 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.R
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.ItemRepositoryImpl
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.api.ItemService
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.api.RetrofitInstance
-import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.datasource.ItemLocalDataSource
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.datasourceimpl.ItemCacheDataSourceImpl
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.datasourceimpl.ItemLocalDataSourceImpl
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.datasourceimpl.ItemRemoteDataSourceImpl
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.roomdb.ItemDao
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.roomdb.ItemDataBase
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.databinding.ActivityMainBinding
-import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.domain.repository.ItemRepository
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.domain.usecases.GetItemsUseCases
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.domain.usecases.UpdateItemsUseCases
-import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.presentation.ItemAdapter
-import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.presentation.ItemViewModel
-import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.presentation.ItemViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -53,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
        // enableEdgeToEdge()
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         adapter =ItemAdapter()
         itemService =RetrofitInstance.getRetrofitInstance().create(ItemService::class.java)
         itemCacheDataSourceImpl = ItemCacheDataSourceImpl()
