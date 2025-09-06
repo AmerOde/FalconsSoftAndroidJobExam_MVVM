@@ -16,4 +16,4 @@ This project follows a **three-layer MVVM architecture** to clearly separate con
 3. **Presentation Layer:** Manages UI logic with ViewModel, Adapter, and user interactions (RecyclerView, SwipeRefresh).
 
 ### Demo
-[Watch Demo Video](https://youtube.com/shorts/6qoIbO5hrBI?si=JOEz_YC3WYbwsFs2)
+[Watch Demo Video](https://youtube.com/shorts/IldyVpKjArM?si=oBHFlPpAmN4A_N1e)
