@@ -7,5 +7,9 @@ interface ItemLocalDataSource {
 
     suspend fun saveItemsToDB(items:List<ItemDisplay>)
 
+    suspend fun searchItemsInDB(searchQuery: String): List<ItemDisplay>
+
+
+
     suspend fun clearAll()
 }

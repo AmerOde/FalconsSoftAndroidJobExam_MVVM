@@ -18,6 +18,11 @@ class ItemLocalDataSourceImpl(private val itemDao: ItemDao):ItemLocalDataSource 
 
     }
 
+    override suspend fun searchItemsInDB(searchQuery: String): List<ItemDisplay> {
+        return itemDao.searchItems(searchQuery)
+
+    }
+
     override suspend fun clearAll() {
 
 

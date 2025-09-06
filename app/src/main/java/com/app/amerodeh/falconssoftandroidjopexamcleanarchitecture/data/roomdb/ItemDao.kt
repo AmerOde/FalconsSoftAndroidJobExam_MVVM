@@ -18,4 +18,7 @@ interface ItemDao {
 
      @androidx.room.Query("SELECT * FROM items_table")
         suspend fun getItems():List<ItemDisplay>
+     @androidx.room.Query("SELECT * FROM items_table WHERE itemName LIKE '%' || :searchQuery || '%' OR category LIKE '%' || :searchQuery || '%'")
+            suspend fun searchItems(searchQuery: String): List <ItemDisplay>
+
 }

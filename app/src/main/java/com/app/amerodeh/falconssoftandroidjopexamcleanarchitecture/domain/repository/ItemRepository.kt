@@ -6,5 +6,6 @@ interface ItemRepository {
 
     suspend fun getItems():List<ItemDisplay>?
     suspend fun updateItems():List<ItemDisplay>?
+    suspend fun searchItems(searchQuery:String) : List<ItemDisplay>?
 
 }

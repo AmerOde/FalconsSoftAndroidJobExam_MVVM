@@ -11,4 +11,5 @@ data class ItemDisplay(
     val itemName :String,
     val category:String,
     val qty:Double,
+    val lastSync:Long
 )

@@ -5,6 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.model.ItemDisplay
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.databinding.ItemLayoutBinding
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ItemAdapter :RecyclerView.Adapter<ItemAdapter.ItemHolder> (){
     private  val itemList =ArrayList<ItemDisplay>()
@@ -33,6 +36,12 @@ class ItemAdapter :RecyclerView.Adapter<ItemAdapter.ItemHolder> (){
                 itemBinding.tvName.text =item.itemName
                 itemBinding.tvCategory.text =item.category
                 itemBinding.tvQyn.text = item.qty.toString()
+                itemBinding.tvLastSyncDate.text =SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(
+                    Date(item.lastSync)
+                )
+                itemBinding.tvLastSyncTime.text =SimpleDateFormat("hh:mm a", Locale.getDefault()).format(
+                    Date(item.lastSync)
+                )
 
             }
     }

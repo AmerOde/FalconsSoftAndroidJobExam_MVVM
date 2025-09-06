@@ -1,43 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
-<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools">
 
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
-
-
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefresh"
+        tools:context=".presentation.MainActivity">
 
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:visibility="gone" />
-    </FrameLayout>
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:title="My Items"
+                app:titleTextColor="@android:color/white">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:queryHint="Search items..."
+                    app:iconifiedByDefault="false" />
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Main content -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="gone" />
+        </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

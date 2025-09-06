@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,6 +24,7 @@ import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.roomdb.I
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.roomdb.ItemDataBase
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.databinding.ActivityMainBinding
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.domain.usecases.GetItemsUseCases
+import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.domain.usecases.SearchItemUseCases
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.domain.usecases.UpdateItemsUseCases
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var itemViewModelFactory: ItemViewModelFactory
     private lateinit var adapter :ItemAdapter
     private lateinit var getItemsUseCases: GetItemsUseCases
+    private lateinit var searchItemsUseCases: SearchItemUseCases
     private lateinit var updateItemsUseCases: UpdateItemsUseCases
     private lateinit var itemCacheDataSourceImpl: ItemCacheDataSourceImpl
     private lateinit var itemLocalDataSourceImpl: ItemLocalDataSourceImpl
@@ -57,9 +60,9 @@ class MainActivity : AppCompatActivity() {
         itemRepositoryImpl = ItemRepositoryImpl(itemRemoteDataSourceImpl,itemLocalDataSourceImpl,itemCacheDataSourceImpl)
         getItemsUseCases = GetItemsUseCases(itemRepositoryImpl)
         updateItemsUseCases = UpdateItemsUseCases(itemRepositoryImpl)
-
+        searchItemsUseCases =SearchItemUseCases(itemRepositoryImpl)
         //view model
-        itemViewModelFactory = ItemViewModelFactory(getItemsUseCases,updateItemsUseCases)
+        itemViewModelFactory = ItemViewModelFactory(getItemsUseCases,updateItemsUseCases,searchItemsUseCases)
         itemViewModel =ViewModelProvider(this,itemViewModelFactory)[ItemViewModel::class.java]
 
         binding.rvMain.adapter =adapter
@@ -68,6 +71,25 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    searchItems(query)
+
+                }
+                return true
+                }
+
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    searchItems(it)
+                }
+                return true
+            }
+
+
+        })
         binding.swipeRefresh.setOnRefreshListener {
             updateItem()
 
@@ -76,6 +98,25 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
+    private fun searchItems(query: String) {
+
+
+        if (query.isEmpty()) {
+          displayItems()
+
+        } else {
+            // البحث حسب النص
+            itemViewModel.searchItems(query).observe(this) { list ->
+                if (list != null) {
+                    adapter.setList(list)
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        }
+
+        }
 
     fun initRecyclerView(){
         binding.rvMain.adapter =adapter

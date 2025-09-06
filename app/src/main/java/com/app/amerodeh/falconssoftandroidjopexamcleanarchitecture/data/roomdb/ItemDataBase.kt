@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.app.amerodeh.falconssoftandroidjopexamcleanarchitecture.data.model.ItemDisplay
 
-@Database(entities = [ItemDisplay::class], version = 1, exportSchema = false)
+@Database(entities = [ItemDisplay::class], version = 2, exportSchema = false)
 
 abstract class ItemDataBase :RoomDatabase(){
     abstract fun itemDao() :ItemDao
@@ -26,6 +26,7 @@ abstract class ItemDataBase :RoomDatabase(){
                         ItemDataBase::class.java,
                         "items_dp"
                     )
+                        .fallbackToDestructiveMigration()
                         .build()
                 }
                 INSTANCE = instance

@@ -24,6 +24,7 @@ class ItemRemoteDataSourceImpl(
         val masters = masterResponse.body()!!.itemsMaster
         val balances = balanceResponse.body()!!.salesManItemsBalance
         val finalList = mutableListOf<ItemDisplay>()
+        val currentTimeMillis :Long = System.currentTimeMillis()
 
         for (balance in balances) {
             val matchedItem = masters.find { it.itemNo == balance.itemCode }
@@ -34,6 +35,8 @@ class ItemRemoteDataSourceImpl(
                         itemName = matchedItem.name,
                         category = matchedItem.categoryId,
                         qty = balance.qty.toDoubleOrNull() ?: 0.0,
+                       lastSync =  currentTimeMillis
+
                     )
                 )
             }

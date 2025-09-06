@@ -26,6 +26,15 @@ class ItemRepositoryImpl(
         return newListOfItems
     }
 
+    override suspend fun searchItems(searchQuery: String): List<ItemDisplay>? {
+        return try {
+            val result = itemLocalDataSource.searchItemsInDB(searchQuery)
+            result
+        } catch (e: Exception) {
+            Log.e("ItemRepository", "Error searching items: ${e.message}")
+            emptyList()
+        }    }
+
     private suspend fun getItemsFromAPI(): List<ItemDisplay> {
         var itemList: List<ItemDisplay> = emptyList()
         try {
