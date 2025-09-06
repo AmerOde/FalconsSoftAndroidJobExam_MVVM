@@ -17,5 +17,3 @@ This project follows a **three-layer MVVM architecture** to clearly separate con
 
 ### Demo
 [Watch Demo Video](https://youtube.com/shorts/6qoIbO5hrBI?si=JOEz_YC3WYbwsFs2)
-## Notes
-- Filtering and search were not implemented due to time constraints.
